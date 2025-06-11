@@ -2,25 +2,71 @@ import './style/style.css';
 import { createHeader } from './components/header.js';
 import { fetchImages } from './utils/fetchImages.js';
 import { renderImages } from './utils/renderImages.js';
+import { 
+  saveFirstSearch, 
+  getFirstSearch, 
+  saveRecentSearch, 
+  getRecentSearches,
+  saveFavorite,
+  removeFavorite,
+  isFavorite
+} from './utils/storage.js';
 
 // Inicializar elementos del DOM
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const searchForm = document.getElementById('searchForm');
+const recentSearchesContainer = document.getElementById('recentSearches');
 
 // Verificar que los elementos existan
 if (!searchInput || !searchBtn || !searchForm) {
   console.error('No se encontraron elementos necesarios en el DOM');
 }
 
+// Función para mostrar búsquedas recientes
+function showRecentSearches() {
+  if (!recentSearchesContainer) return;
+  
+  const recentSearches = getRecentSearches();
+  if (recentSearches.length === 0) {
+    recentSearchesContainer.innerHTML = '<p>No hay búsquedas recientes</p>';
+    return;
+  }
+
+  const searchesHTML = recentSearches
+    .map(search => `
+      <button class="recent-search-btn" data-search="${search}">
+        ${search}
+      </button>
+    `)
+    .join('');
+
+  recentSearchesContainer.innerHTML = `
+    <h3>Búsquedas recientes</h3>
+    <div class="recent-searches-list">
+      ${searchesHTML}
+    </div>
+  `;
+
+  // Agregar event listeners a los botones de búsqueda reciente
+  recentSearchesContainer.querySelectorAll('.recent-search-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const search = btn.dataset.search;
+      searchInput.value = search;
+      handleSearch(search);
+    });
+  });
+}
+
 createHeader(() => {
-  const firstSearch = localStorage.getItem("firstSearch");
+  const firstSearch = getFirstSearch();
   if (firstSearch) {
     searchInput.value = firstSearch;
     handleSearch(firstSearch);
   } else {
     showModal("No hay búsqueda guardada.");
   }
+  showRecentSearches();
 });
 
 function showModal(message) {
@@ -36,9 +82,25 @@ function showModal(message) {
   modalMessage.textContent = message;
   modal.classList.remove('hidden');
 
+  // Cerrar modal al hacer clic en el botón
   closeModal.onclick = () => {
     modal.classList.add('hidden');
   };
+
+  // Cerrar modal al hacer clic fuera
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  };
+
+  // Cerrar modal con la tecla Escape
+  document.addEventListener('keydown', function closeOnEscape(e) {
+    if (e.key === 'Escape') {
+      modal.classList.add('hidden');
+      document.removeEventListener('keydown', closeOnEscape);
+    }
+  });
 }
 
 function handleSearch(query) {
@@ -54,11 +116,19 @@ function handleSearch(query) {
         return;
       }
 
-      renderImages(images);
+      renderImages(images, {
+        onFavorite: (image) => {
+          if (isFavorite(image.id)) {
+            removeFavorite(image.id);
+          } else {
+            saveFavorite(image);
+          }
+        }
+      });
 
-      if (!localStorage.getItem("firstSearch")) {
-        localStorage.setItem("firstSearch", query);
-      }
+      saveFirstSearch(query);
+      saveRecentSearch(query);
+      showRecentSearches();
     })
     .catch(error => {
       console.error("Error al buscar imágenes:", error);

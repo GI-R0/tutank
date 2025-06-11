@@ -34,20 +34,8 @@ export async function fetchImages(query, page = 1) {
       return [];
     }
 
-    return data.results.map(image => ({
-      id: image.id,
-      url: image.urls.regular,
-      thumb: image.urls.thumb,
-      alt: image.alt_description || 'Imagen sin descripción',
-      description: image.description || image.alt_description || '',
-      author: image.user.name,
-      authorUrl: image.user.links.html,
-      likes: image.likes,
-      tags: image.tags ? image.tags.map(tag => tag.title) : [],
-      createdAt: image.created_at,
-      width: image.width,
-      height: image.height
-    }));
+    // Devolver los datos exactamente como vienen de la API
+    return data.results;
   } catch (error) {
     console.error('Error al buscar imágenes:', error);
     throw new Error(error.message || 'No se pudieron cargar las imágenes. Por favor, intenta de nuevo.');

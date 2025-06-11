@@ -4,52 +4,65 @@ Un clon de Pinterest construido con JavaScript vanilla y la API de Unsplash.
 
 ## Características
 
-- 🔍 Búsqueda de imágenes en tiempo real
-- 🖼️ Visualización de imágenes en formato grid
-- 👤 Información del fotógrafo
-- ❤️ Contador de likes
+- 🔍 Búsqueda de imágenes
+- 🖼️ Galería de imágenes estilo Pinterest
 - 📱 Diseño responsive
-- 💾 Persistencia de la primera búsqueda
+- ♿ Accesibilidad mejorada
+- 💾 Guardado de búsquedas recientes
 
-## Tecnologías Utilizadas
+## Tecnologías utilizadas
 
 - JavaScript Vanilla
-- Vite
+- CSS3
+- HTML5
 - API de Unsplash
-- CSS Grid y Flexbox
+- Vite como bundler
+
+## 🔍 Funcionalidades
+
+- Buscar imágenes usando palabras clave.
+- Visualización en estilo tipo Pinterest (masonry).
+- Evita duplicados al guardar.
+- Modal de confirmación al guardar.
+- Responsive design completo.
+- Modo oscuro adaptativo (`prefers-color-scheme`).
+- Navegación con menú hamburguesa.
 
 ## Instalación
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/pinterest-clon.git
+git clone https://github.com/TU_USUARIO/pinterest-clone.git
+cd pinterest-clone
 ```
 
 2. Instala las dependencias:
 ```bash
-cd pinterest-clon
 npm install
 ```
 
-3. Configura las variables de entorno:
-   - Crea un archivo `.env` en la raíz del proyecto
-   - Agrega tu API key de Unsplash:
-   ```
-   VITE_UNSPLASH_ACCESS_KEY=tu_api_key_aqui
-   ```
-   - Puedes obtener una API key en [Unsplash Developers](https://unsplash.com/developers)
+3. Crea un archivo `.env` en la raíz del proyecto y agrega tu API key de Unsplash:
+```
+VITE_UNSPLASH_ACCESS_KEY=tu_api_key_aqui
+```
 
 4. Inicia el servidor de desarrollo:
 ```bash
 npm run dev
 ```
 
-5. Abre http://localhost:3000 en tu navegador
-
 ## Uso
 
-1. Escribe un término de búsqueda en el campo de búsqueda
-2. Haz clic en el botón "Buscar"
-3. Explora las imágenes y haz clic en el nombre del fotógrafo para ver su perfil
-4. Haz clic en el logo para volver a tu primera búsqueda
+1. Abre tu navegador y ve a `http://localhost:3000`
+2. Escribe una palabra en la barra de búsqueda
+3. Presiona Enter o haz clic en el botón "Buscar"
+4. Explora las imágenes en la galería
+
+## Contribuir
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+## Licencia
+
+MIT
 

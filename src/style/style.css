@@ -145,11 +145,185 @@ header {
 /* Galería */
 #gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  aspect-ratio: 1/1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.gallery-item:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-info {
+  color: white;
+  font-size: 0.65rem;
+  margin-top: auto;
+  padding: 0.25rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.1rem 0.15rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  max-width: 100%;
+}
+
+.author-avatar {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background-color: #e0e0e0;
+}
+
+.author-name {
+  color: white;
+  font-size: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+  font-weight: 500;
+}
+
+.author-name:hover {
+  text-decoration: underline;
+}
+
+.image-stats {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.favorite-btn {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  color: white;
+  transition: all 0.3s ease;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 0.4rem;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.favorite-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.favorite-btn.active {
+  color: #ff4d4d;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.view-btn {
+  align-self: center;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  margin-top: 0.4rem;
+}
+
+.view-btn:hover {
+  background: white;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #gallery {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.4rem;
+    padding: 0.4rem;
+  }
 }
 
 /* Tarjetas */
@@ -318,42 +492,6 @@ header {
 }
 
 /* Media Queries */
-@media (max-width: 480px) {
-  header {
-    padding: 0.75rem;
-  }
-
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  .search {
-    padding: 0.75rem;
-  }
-
-  .search input {
-    height: 40px;
-    font-size: 0.9rem;
-  }
-
-  #gallery {
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .card {
-    border-radius: 12px;
-  }
-
-  .card-content {
-    padding: 0.75rem;
-  }
-
-  .modal-content {
-    padding: 1.5rem;
-  }
-}
-
 @media (min-width: 481px) and (max-width: 768px) {
   .nav-links {
     position: fixed;
@@ -482,4 +620,109 @@ header {
   .card:hover .card-content {
     background: #2a2a2a;
   }
+}
+
+/* Estilos para búsquedas recientes */
+#recentSearches {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#recentSearches h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.recent-searches-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recent-search-btn {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.recent-search-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Estilos para favoritos */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .image-overlay {
+  opacity: 1;
+}
+
+.favorite-btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.favorite-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.favorite-btn.active {
+  color: #ff4d4d;
+}
+
+.view-btn {
+  align-self: center;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn:hover {
+  background: var(--color-primary-dark);
 }

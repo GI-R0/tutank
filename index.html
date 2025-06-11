@@ -2,28 +2,28 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Pinterest Clona2</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinterest Clone</title>
   </head>
   <body>
-    <header id="header"></header>
-    <main>
-      <section class="search">
-        <form id="searchForm">
+    <div id="app">
+      <header id="header"></header>
+      <main>
+        <form id="searchForm" class="search-form">
           <input type="text" id="searchInput" placeholder="Buscar imágenes..." />
           <button type="submit" id="searchBtn">Buscar</button>
         </form>
-      </section>
-      <section id="gallery" class="masonry gallery"></section>
-    </main>
-
-    <div id="modal" class="modal hidden">
-      <div class="modal-content">
-        <p id="modalMessage">Mensaje aquí</p>
-        <button id="closeModal">Cerrar</button>
+        <div id="recentSearches"></div>
+        <div id="gallery" class="gallery"></div>
+      </main>
+      <div id="modal" class="modal hidden">
+        <div class="modal-content">
+          <p id="modalMessage"></p>
+          <button id="closeModal">Cerrar</button>
+        </div>
       </div>
     </div>
-
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
