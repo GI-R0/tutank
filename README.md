@@ -53,6 +53,3 @@ npm run dev
 3. Explora las imágenes y haz clic en el nombre del fotógrafo para ver su perfil
 4. Haz clic en el logo para volver a tu primera búsqueda
 
-## Licencia
-
-MIT

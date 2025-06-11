@@ -1,4 +1,12 @@
 export async function fetchImages(query, page = 1) {
+  if (!query || typeof query !== 'string') {
+    throw new Error('La consulta de búsqueda es requerida y debe ser una cadena de texto.');
+  }
+
+  if (page < 1) {
+    page = 1;
+  }
+
   try {
     const apiKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
     
@@ -11,7 +19,13 @@ export async function fetchImages(query, page = 1) {
     const res = await fetch(url);
     
     if (!res.ok) {
-      throw new Error(`Error de la API: ${res.status}`);
+      if (res.status === 401) {
+        throw new Error('Error de autenticación. Verifica tu API key de Unsplash.');
+      } else if (res.status === 403) {
+        throw new Error('Límite de solicitudes excedido. Intenta más tarde.');
+      } else {
+        throw new Error(`Error de la API: ${res.status}`);
+      }
     }
     
     const data = await res.json();
@@ -25,12 +39,17 @@ export async function fetchImages(query, page = 1) {
       url: image.urls.regular,
       thumb: image.urls.thumb,
       alt: image.alt_description || 'Imagen sin descripción',
+      description: image.description || image.alt_description || '',
       author: image.user.name,
       authorUrl: image.user.links.html,
-      likes: image.likes
+      likes: image.likes,
+      tags: image.tags ? image.tags.map(tag => tag.title) : [],
+      createdAt: image.created_at,
+      width: image.width,
+      height: image.height
     }));
   } catch (error) {
     console.error('Error al buscar imágenes:', error);
-    throw new Error('No se pudieron cargar las imágenes. Por favor, intenta de nuevo.');
+    throw new Error(error.message || 'No se pudieron cargar las imágenes. Por favor, intenta de nuevo.');
   }
 }

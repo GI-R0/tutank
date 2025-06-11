@@ -3,12 +3,12 @@ export function createCard(image) {
   card.classList.add('card');
 
   card.innerHTML = `
-    <img src="${image.urls.small}" alt="${image.alt_description || 'Imagen'}" />
+    <img src="${image.url}" alt="${image.alt || 'Imagen'}" loading="lazy" />
     <div class="card-content">
-      <h3>${image.alt_description || 'Sin descripción'}</h3>
-      <p>📷 Autor: ${image.user.name}</p>
+      <h3>${image.description || 'Sin descripción'}</h3>
+      <p>📷 Autor: ${image.author}</p>
       <p>❤️ Likes: ${image.likes}</p>
-      <a href="${image.links.download}" target="_blank">Descargar</a>
+      <a href="${image.authorUrl}" target="_blank" class="author-link">Ver perfil del autor</a>
     </div>
   `;
 
