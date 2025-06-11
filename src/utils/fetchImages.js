@@ -1,8 +1,9 @@
-const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const ACCESS_KEY = 'cfzDr_24QkWcoep2hVT8TrBAVK_BRBOcOOHI8sYrezw'; 
 
 export async function fetchImages(query, page = 1) {
   try {
-    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=20&page=${page}&client_id=${ACCESS_KEY}`;
+    const apiKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY || ACCESS_KEY;
+    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=20&page=${page}&client_id=${apiKey}`;
     
     const res = await fetch(url);
     
