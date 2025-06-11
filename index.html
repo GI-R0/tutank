@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pinterest Clon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header id="header"></header>
+    <main>
+      <section class="search">
+       <input type="text" id="searchInput" placeholder="Buscar imágenes..." aria-label="Campo de búsqueda de imágenes" />
+<button id="searchBtn" aria-label="Botón para buscar imágenes">Buscar</button>
+ 
+      </section>
+      <section id="gallery" class="masonry gallery"></section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <p id="modalMessage">Mensaje aquí</p>
+    <button id="closeModal">Cerrar</button>
+  </div>
+</div>
+
+  </body>
+</html>
