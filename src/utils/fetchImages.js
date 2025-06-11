@@ -1,4 +1,4 @@
-const ACCESS_KEY = 'cfzDr_24QkWcoep2hVT8TrBAVK_BRBOcOOHI8sYrezw';
+const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
 export async function fetchImages(query, page = 1) {
   try {
