@@ -53,9 +53,9 @@ export function renderImages(images, options = {}) {
                   alt="${img.user.name}" 
                   class="author-avatar"
                   loading="lazy"
-                  width="8"
-                  height="8"
-                  onerror="this.onerror=null; this.src='https://via.placeholder.com/8x8?text=U';"
+                  width="24"
+                  height="24"
+                  onerror="this.onerror=null; this.src='https://via.placeholder.com/24x24?text=U';"
                 >
                 <a href="${img.user.links.html}" target="_blank" rel="noopener noreferrer" class="author-name">
                   ${img.user.name}
