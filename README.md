@@ -58,11 +58,3 @@ npm run dev
 3. Presiona Enter o haz clic en el botón "Buscar"
 4. Explora las imágenes en la galería
 
-## Contribuir
-
-Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
-
-## Licencia
-
-MIT
-
